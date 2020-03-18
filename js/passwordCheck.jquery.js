@@ -51,7 +51,7 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
             //if it is long enough and has a special character - everything is fine
             if(longEnough && hasSpecialChars) {
-                this.wrapperField.removeClass(this.warningClass + ' ' + this.errorClass).addClass(this.successClass);
+                this.wrapperField.removeClass(this.warningClass + ' ' + this.errorClass).addClass(this.successClass);           /*Diese drei Zeilen sind in der passwordCheck.Js Datei nicht so vorhanden dort stehen sie ohne die Klamern und ihre Inhalte*/
                 this.passwordSubmitButton.attr('disabled', false);
             } else if(!hasSpecialChars && longEnough) { //if it is long enough but it has no special character set class warning
                 this.wrapperField.removeClass(this.successClass + ' ' + this.errorClass).addClass(this.warningClass);
@@ -77,7 +77,11 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     this.checkForLength = function() {
         //@todo
         //have a look at javascript string methods and properties
-        return true; //this needs to be replaced!
+        if(this.minLength==8){
+            return true;
+        }else {
+            return false;
+        }
     };
 
     /*
@@ -86,8 +90,15 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     this.checkForSpecialCharacters = function() {
         //@todo
         //have a look at javascript string methods and properties
-        //you could probably "match" it somehow
-        return true; //this needs to be replaced!
+        //you could probably "match" it someh
+        switch (this.checkForLength) {
+            case "$":return false; break;
+            case "§": return false; break;
+            case "%": return false;break;
+            case "&":return false; break;
+            case "/":return false;
+            default: return true; break;
+        }
     };
     //TODO 2 end
 }

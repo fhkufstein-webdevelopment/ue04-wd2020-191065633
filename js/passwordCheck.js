@@ -18,6 +18,7 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     //TODO start
     //now for the events which should fire:
     //if we leave the password field (focus is lost) - JavaScript Method "onblur" for an input field in our case the field this.passwordField
+    if(this.passwordField.onmouseout){
     //if we enter the password field (focus is set) - JavaScript Method "onfocus" for an input field - again in our case the field this.passwordField
     //if we are in the password field an enter text - JavaScript Method "onkeyup" or "onkeup" - again in our case the field this.passwordField
     //if we try to click the submit button - JavaScript Method "onclick" - in our case this.passwordSubmitButton
@@ -27,8 +28,26 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
         //onblur is an event which happens in "passwordField" -> so the keyword "this" would refer to the passwordField NOT to our class
         //therefore we previously saved "this" in a variable called "that"
         that.check();
-    };
+    };}
+    else if(this.passwordField.onmouseover){
+    this.passwordField.onfocus;
+    }
+    else if(this.passwordField.onkeyup){
+        if(this.passwordSubmitButton.onclick){
+            this.passwordSubmitButton.onclick=function () {
 
+            }
+        }
+    }
+
+
+
+    else if(this.passwordField.focus(set)){
+        this.passwordField.onfocus=function(){
+            this.passwordField.onkeyup;
+        }
+
+    }
     //TODO implement the other events in the exact same way!
 
 
@@ -71,7 +90,11 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     this.checkForLength = function() {
         //@todo
         //have a look at javascript string methods and properties
-        return true; //this needs to be replaced!
+       if(this.minLength==8){
+            return true;
+        }else {
+           return false;
+       }
     };
 
     /*
@@ -81,7 +104,14 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
         //@todo
         //have a look at javascript string methods and properties
         //you could probably "match" it somehow
-        return true; //this needs to be replaced!
+        switch (this.checkForLength) {
+            case "$":return false; break;
+            case "§": return false; break;
+            case "%": return false;break;
+            case "&":return false; break;
+            case "/":return false;
+            default: return true; break;
+        }
     };
 }
 
